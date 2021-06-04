@@ -75,7 +75,7 @@
       ]),
       entrar () {
         if (this.form.email && this.form.senha) {
-          axios.post('main/usuario/logar', { email: this.form.email, senha: this.form.senha})
+          axios.post('usuario/logar', { email: this.form.email, senha: this.form.senha})
             .then(res => {
               this.error = null
               const user = { 'nome': res.nome, 'email': res.email}
