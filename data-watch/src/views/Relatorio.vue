@@ -38,7 +38,7 @@
       }
     },
     mounted (){
-      axios.get('main/listardocumentos',
+      axios.get('listardocumentos',
         { headers: { Accept: 'application/json'} })
         .then(res => {
             this.registros = res.data;
