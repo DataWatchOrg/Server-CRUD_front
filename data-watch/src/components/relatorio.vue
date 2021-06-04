@@ -24,14 +24,12 @@
 
 export default {
     data () {
-        // registros: [] 
       return {
         search: '',
         headers: [
           { text: 'Campos alterados', 
             align: 'start',
             value: 'campos_alterados' },
-          { text: 'ID', value: '_id' },
           { text: 'Id Usuário', value: 'id_usuario' },
           { text: 'Operação', value: 'operacao' },
           { text: 'Id Operador', value: 'id_operador' },
