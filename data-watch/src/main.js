@@ -7,7 +7,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-axios.defaults.baseURL = 'localhost:3001'
+axios.defaults.baseURL = 'http://localhost:3001'
 axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
 axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 

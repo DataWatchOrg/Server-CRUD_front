@@ -21,6 +21,7 @@
                 label="Senha"
                 v-model="form.senha"
               />
+              <span v-if="error" style="color:red">{{error}}</span>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -45,7 +46,7 @@
   import axios from 'axios'
 
   export default {
-    name: 'Home',
+    name: 'Login',
     components: {
       Logo
     },
@@ -55,7 +56,7 @@
           email: '',
           senha: ''
         },
-        error: ''
+        error: null
       }
     },
     computed: {
@@ -76,15 +77,18 @@
         if (this.form.email && this.form.senha) {
           axios.post('main/usuario/logar', { email: this.form.email, senha: this.form.senha})
             .then(res => {
+              this.error = null
               const user = { 'nome': res.nome, 'email': res.email}
               this.currentUser = user
               this.$router.push('/about')
             })
             .catch(error => {
-              console.log(error)
+              if (error.response.status === 403) {
+                this.error = 'Credenciais inválidas.'
+              }
             })
         } else {
-          console.log('digita, caramba')
+          this.error = 'Campos não preenchidos.'
         }
       }
     }
