@@ -78,9 +78,9 @@
           axios.post('usuario/logar', { email: this.form.email, senha: this.form.senha})
             .then(res => {
               this.error = null
-              const user = { 'nome': res.nome, 'email': res.email}
+              const user = { 'nome': res.data.nome, 'email': res.data.email}
               this.currentUser = user
-              this.$router.push('/about')
+              this.$router.push('/relatorio')
             })
             .catch(error => {
               if (error.response.status === 403) {

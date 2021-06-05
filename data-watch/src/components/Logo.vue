@@ -1,6 +1,6 @@
 <template>
-    <div class="logo">
-        <v-icon color="primary" class="mr-1" :x-large="!text">mdi-eye-circle</v-icon>
+    <div class="logo" :class="[ light ? 'light' : '']">
+        <v-icon class="mr-1" :color="light ? 'white' : 'primary' " :x-large="!text">mdi-eye-circle</v-icon>
         <span v-if="text">
             <span class="logo-data">Data</span>Watch
         </span>
@@ -11,6 +11,10 @@
 export default {
     props: {
         text: {
+            type: Boolean,
+            default: false
+        },
+        light: {
             type: Boolean,
             default: false
         }
@@ -26,12 +30,16 @@ export default {
     font-weight: 300;
     margin: 10px;
   }
-
+  
   .logo-data {
     font-weight: 700;
   }
 
   .logo-icon-huge {
       font-size: 35px;
+  }
+
+  .light {
+      color: white;
   }
 </style>
