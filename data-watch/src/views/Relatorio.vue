@@ -29,7 +29,7 @@
           single-line
           hide-details
         />
-        <button class="btnCSV" v-on:click="downloadCSV">Download</button>
+        <button class="btnCSV" style="background-color: #0080FF" v-on:click="downloadCSV">Download</button>
       </v-row>
       <v-data-table
         :headers="headers"
