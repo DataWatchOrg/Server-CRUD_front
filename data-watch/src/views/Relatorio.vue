@@ -29,11 +29,13 @@
           single-line
           hide-details
         />
+        <button class="btnCSV" v-on:click="downloadCSV">Download</button>
       </v-row>
       <v-data-table
         :headers="headers"
         :items="registros"
         :search="search"
+        id="excel-table"
       ></v-data-table>
     </v-col>
   </v-container>
@@ -43,6 +45,7 @@
   import axios from 'axios'
   import Logo from '../components/Logo'
   import { mapMutations } from 'vuex'
+  import * as XLSX from 'xlsx'; 
 
   export default {
     name: 'RelatorioView',
@@ -56,7 +59,7 @@
           { text: 'Operação', value: 'operacao' },
           { text: 'Id Usuário', value: 'id_usuario' },
           { text: 'Id Operador', value: 'id_operador' },
-          { text: 'Campos alterados', 
+          { text: 'Campos alterados',
             align: 'start',
             value: 'campos_alterados' }
         ],
@@ -91,6 +94,23 @@
       sair () {
         this.currentUser = null
         this.$router.push('/')
+      },
+      downloadCSV: function (){
+        axios.get('relatorio',
+        { headers: { Accept: 'application/download'} })
+        .then(res => {
+            
+            let element = document.getElementById('excel-table'); 
+            const ws = XLSX.WorkSheet = XLSX.utils.table_to_sheet(element, {raw:true});
+            const wb = XLSX.WorkBook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Relatório');
+            XLSX.writeFile(wb, 'Relatório.xlsx');
+
+            console.log(res.data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
       }
     }
   }
@@ -100,5 +120,11 @@
 .page-title {
   font-weight: 700;
   font-size: 25px;
+}
+.btnCSV{
+    background: #00ff1f;
+    padding: 1px 10px 1px 10px;
+    margin-left: 20px;
+    color: #fff;
 }
 </style>
